@@ -37,8 +37,8 @@ Stirling (HTML→Image)
 🛠 Setup
 	1.	Clone Repo
 
-git clone https://github.com/yourorg/budget-telegram-bot.git
-cd budget-telegram-bot
+git clone https://github.com/co-founderai/budget_hog_bot/
+cd budget_hog_bot
 
 
 	2.	Configure Supabase
