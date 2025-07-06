@@ -1,0 +1,979 @@
+{
+  "name": "mcp",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "buddyget"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -80
+      ],
+      "id": "e92a3329-a4db-4ecf-91c8-d5a0d48c1eb2",
+      "name": "MCP Server Trigger",
+      "webhookId": "ecf32931-eadd-4107-9a31-b8cb7e66191b"
+    },
+    {
+      "parameters": {
+        "tableId": "transactions",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `user_id`, 'string') }}"
+            },
+            {
+              "fieldId": "category",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `spending or income category`, 'string') }}"
+            },
+            {
+              "fieldId": "currency",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues2_Field_Value', `currency`, 'string') }}"
+            },
+            {
+              "fieldId": "description",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues3_Field_Value', `description`, 'string') }}"
+            },
+            {
+              "fieldId": "telegram_id",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues4_Field_Value', `telegram_id`, 'string') }}"
+            },
+            {
+              "fieldId": "type",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues5_Field_Value', `“income” or “spending”`, 'string') }}"
+            },
+            {
+              "fieldId": "amount",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues6_Field_Value', `transaction amount`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        140
+      ],
+      "id": "69838404-f880-45b6-b862-6c729da7af8e",
+      "name": "save_transaction",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "profiles",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `user telegram_id`, 'string') }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "currency",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `user main currency`, 'string') }}"
+            },
+            {
+              "fieldId": "language",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `preferable communication language`, 'string') }}"
+            },
+            {
+              "fieldId": "monthly_limit",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues2_Field_Value', `user monthly spending limit in his currency`, 'string') }}"
+            },
+            {
+              "fieldId": "email",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues3_Field_Value', `user email is provided`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        140
+      ],
+      "id": "b177c141-2db2-4066-b13e-03ce82b4d22a",
+      "name": "update_profile",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "transactions",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `original transaction_id uuid`, 'string') }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "user_id",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `user_id`, 'string') }}"
+            },
+            {
+              "fieldId": "category",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `spending or income`, 'string') }}"
+            },
+            {
+              "fieldId": "currency",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues2_Field_Value', `currency`, 'string') }}"
+            },
+            {
+              "fieldId": "description",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues3_Field_Value', `description`, 'string') }}"
+            },
+            {
+              "fieldId": "type",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues4_Field_Value', `“income” or “spending”`, 'string') }}"
+            },
+            {
+              "fieldId": "amount",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues5_Field_Value', `transaction amount`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -140,
+        140
+      ],
+      "id": "cc28b86e-4a71-418a-9098-571d997e0fc1",
+      "name": "update_transaction",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "call this tool whaen user wan't to contact support, delete account, have a business proposal, has an error",
+        "workflowId": {
+          "__rl": true,
+          "value": "SMjoyoLF7hzr0YsJ",
+          "mode": "list",
+          "cachedResultName": "support"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('message', `user request what is wanted and telegram_id, user_name`, 'string') }}"
+          },
+          "matchingColumns": [
+            "message"
+          ],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        140,
+        140
+      ],
+      "id": "f4aeeeeb-01f6-4451-b5f4-7f7e3904172b",
+      "name": "support"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "transactions",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `telegram_id`, 'string') }}"
+            },
+            {
+              "keyName": "occurred_at",
+              "condition": "gte",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Field_Value', `when transaction was made (not created) it is a FROM this date`, 'string') }}"
+            },
+            {
+              "keyName": "occurred_at",
+              "condition": "lte",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions2_Field_Value', `when transaction was made (not created) it is a UNTIL this date`, 'string') }}"
+            },
+            {
+              "keyName": "type",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions3_Field_Value', `income or spending or blank`, 'string') }}"
+            },
+            {
+              "keyName": "category",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions4_Field_Value', `spending or income category`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        140
+      ],
+      "id": "7b81bb15-7be4-4443-923f-f6c83615411b",
+      "name": "get_transactions",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "transactions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "telegram_id",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `telegram_id`, 'string') }}"
+            },
+            {
+              "keyName": "occurred_at",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Value', `when transaction was made`, 'string') }}"
+            },
+            {
+              "keyName": "type",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions2_Value', `income or spending`, 'string') }}"
+            },
+            {
+              "keyName": "category",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions3_Value', `transaction category`, 'string') }}"
+            },
+            {
+              "keyName": "amount",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions4_Value', `transaction amount`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -380,
+        140
+      ],
+      "id": "1218667e-2f61-4c9b-bc47-ce6de5802f61",
+      "name": "search_transaction",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Makes an HTTP request for the currency conversion ",
+        "url": "https://api.synthfinance.com/rates/live",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "from",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters0_Value', `The base currency, in 3-character ISO code format, to start with.`, 'string') }}"
+            },
+            {
+              "name": "to",
+              "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('parameters1_Value', `Comma-separated string of 3-character ISO code for the currency you want to get rates for.`, 'string') }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 5357a70ef219cdc557e947470255ca23f70fc9a7"
+            },
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        -260,
+        300
+      ],
+      "id": "34453915-766d-4200-a438-f2c0b84368d4",
+      "name": "converter"
+    },
+    {
+      "parameters": {
+        "description": "call this tool to get list of transactions as a CSV file",
+        "workflowId": {
+          "__rl": true,
+          "value": "qPkauhFissfR6IeR",
+          "mode": "list",
+          "cachedResultName": "generate excel"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telegram_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telegram_id', `telegram_id MANDATORY!`, 'string') }}",
+            "from": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('from', `occuread_at FROM`, 'string') }}",
+            "to": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('to', `occured_at TO`, 'string') }}",
+            "type": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('type', `type spending or income (optional)`, 'string') }}",
+            "category": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('category', `category (optional)`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "telegram_id",
+              "displayName": "telegram_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "from",
+              "displayName": "from",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "to",
+              "displayName": "to",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "category",
+              "displayName": "category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        280,
+        140
+      ],
+      "id": "54fa6067-7640-4211-83c9-5368ddd3d510",
+      "name": "generate_csv"
+    },
+    {
+      "parameters": {
+        "description": "Call this tool to generate summary report in PNG format for a specific time period",
+        "workflowId": {
+          "__rl": true,
+          "value": "yLVbQLPdQpCtPlCS",
+          "mode": "list",
+          "cachedResultName": "buddyget report"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "from": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('from', `date FROM`, 'string') }}",
+            "until": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('until', `date UNTIL`, 'string') }}",
+            "telegram_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telegram_id', `user telegram_id`, 'number') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "from",
+              "displayName": "from",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "until",
+              "displayName": "until",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "telegram_id",
+              "displayName": "telegram_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        140
+      ],
+      "id": "b62d4db9-a25d-4e67-9490-303ef9b2c86c",
+      "name": "get_summary"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Call this tool to create new saving",
+        "tableId": "savings",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "telegram_id",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `user telegram_id`, 'string') }}"
+            },
+            {
+              "fieldId": "amount",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `numeric amanount of money added to savings`, 'string') }}"
+            },
+            {
+              "fieldId": "currency",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues2_Field_Value', `user default or a specific currency`, 'string') }}"
+            },
+            {
+              "fieldId": "saving_goal",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues3_Field_Value', `saving_goal label take it from goal that user set`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -120,
+        300
+      ],
+      "id": "dc38dc21-6b1c-41fc-95c1-1732c6f00c0f",
+      "name": "save_savings",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Set user saving goal",
+        "tableId": "saving_goal",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "telegram_id",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `user telegram_id`, 'string') }}"
+            },
+            {
+              "fieldId": "goal_amount",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `saving goal amount`, 'string') }}"
+            },
+            {
+              "fieldId": "label",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues2_Field_Value', `label, title, name`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        300
+      ],
+      "id": "eb2b91ff-57be-4c2f-a2cc-0b1d23d5811c",
+      "name": "set_savings_goal",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Get user savings",
+        "operation": "getAll",
+        "tableId": "savings",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "occurred_at",
+              "condition": "gte",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `occured at FROM date`, 'string') }}"
+            },
+            {
+              "keyName": "occurred_at",
+              "condition": "lte",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Field_Value', `Occured at UNTIL date`, 'string') }}"
+            },
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions2_Field_Value', `user telegram_id`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        20,
+        300
+      ],
+      "id": "adc3ee80-ede8-4909-8819-30e4fbbd90ef",
+      "name": "get_all_savings",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "update user saving goal",
+        "operation": "update",
+        "tableId": "saving_goal",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "goal_amount",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `goal amount`, 'string') }}"
+            },
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Field_Value', `user telegram_id`, 'string') }}"
+            },
+            {
+              "keyName": "label",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions2_Field_Value', `goal label, title or name`, 'string') }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "label",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues0_Field_Value', `new goal label value`, 'string') }}"
+            },
+            {
+              "fieldId": "goal_amount",
+              "fieldValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('fieldValues1_Field_Value', `new goal amount`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -580,
+        300
+      ],
+      "id": "cce7e5f0-13a7-4cd8-8bbe-60c30ee5605f",
+      "name": "update_saving_goal",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "delete user saving goal",
+        "operation": "delete",
+        "tableId": "saving_goal",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "goal_amount",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `goal amount`, 'string') }}"
+            },
+            {
+              "keyName": "telegram_id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions1_Field_Value', `user telegram_id`, 'string') }}"
+            },
+            {
+              "keyName": "label",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions2_Field_Value', `goal label, title or name`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -740,
+        300
+      ],
+      "id": "8f8465bb-fa3a-4706-910e-7e0d83acc9bf",
+      "name": "delete_saving_goal",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "transactions",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('conditions0_Field_Value', `original transaction_id uuid`, 'string') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabaseTool",
+      "typeVersion": 1,
+      "position": [
+        -980,
+        140
+      ],
+      "id": "80439a70-4998-4cb3-895a-91ad248cdd84",
+      "name": "delete_transaction",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xMRUtIaldrw5pk6O",
+          "name": "buddyget"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "call this tool to get savings_summary",
+        "workflowId": {
+          "__rl": true,
+          "value": "IonKWkRuLuGWYMQX",
+          "mode": "list",
+          "cachedResultName": "savings_summary"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "telegram_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('telegram_id', `user telegram_id`, 'number') }}",
+            "saving_goal": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('saving_goal', `saving_goal label`, 'string') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "telegram_id",
+              "displayName": "telegram_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number"
+            },
+            {
+              "id": "saving_goal",
+              "displayName": "saving_goal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        180,
+        300
+      ],
+      "id": "a525da92-607e-402c-9d48-82006bc354c5",
+      "name": "savings_summary"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "save_transaction": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_profile": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_transaction": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "support": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_transactions": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_transaction": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "converter": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "generate_csv": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_summary": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "save_savings": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set_savings_goal": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_all_savings": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_saving_goal": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete_saving_goal": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete_transaction": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "savings_summary": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "12888cfa-294a-438e-88b4-b45dcada0f15",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8cee2d7b32217b930b1fc7027eeff963691fb17e5ecf42d894412b0a9416bbc7"
+  },
+  "id": "NHcnN8wDq4XSOkRv",
+  "tags": []
+}
