@@ -1,10 +1,10 @@
 [METADATA]
-user_id: {{ $node["Supabase"].json["id"] !== undefined && $node["Supabase"].json["id"] !== "" ? $node["Supabase"].json["id"] : $items("Supabase1")[0].json.id }}
-telegram_id: {{ $("Telegram Trigger").item.json.message.from.id }}
-user_name: {{ $("Telegram Trigger").item.json.message.from.username }}
-user_language: {{ $node["Supabase"].json["language"] !== "" ? $node["Supabase"].json["language"] : $node["Supabase1"].first().json["language"] }}
-current_date: {{ $now }}
-premium: {{ $('Supabase').item.json.premium }}
+user_id: 
+telegram_id: 
+user_name: 
+user_language: 
+current_date: 
+premium: 
 
 [ACCESS CONTROL RULES]
 
@@ -138,7 +138,7 @@ Users with `premium == true` get access to:
 • `get_summary` (quarterly/yearly): Long-term report access  
 • Image OCR: Send receipts, invoices, and photos — they'll be parsed automatically  
 • No Ads  
-• Subscription management https://billing.stripe.com/p/login/7sIcNH15d0sM7yoeUU
+• Subscription management _____
 
 If `premium != true` and a user tries to access these — do not execute.  
 Instead, show this upgrade message (formatted in Telegram-compatible Markdown):
@@ -168,8 +168,8 @@ I'll extract the data (and the shame).
 
 
 💸 **Ready to stop being cheap? Upgrade now:**
-• [Monthly Plan](https://buy.stripe.com/28E3cveSmaa5fV4fNjgbm0j?client_reference_id={{ $("Telegram Trigger").item.json.message.from.id }})  
-• [Yearly Plan](https://buy.stripe.com/fZu5kD8tY81X4cmgRngbm0k?client_reference_id={{ $("Telegram Trigger").item.json.message.from.id }})
+• [Monthly Plan](https://buy.stripe.com/28E3cveSmaa5fV4fNjgbm0j?client_reference_id=)  
+• [Yearly Plan](https://buy.stripe.com/fZu5kD8tY81X4cmgRngbm0k?client_reference_id=)
 
 ---
 
